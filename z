@@ -1,0 +1,84 @@
+[1mdiff --git a/initial-boot.sh b/initial-boot.sh[m
+[1mindex e182171..5e61cb4 100755[m
+[1m--- a/initial-boot.sh[m
+[1m+++ b/initial-boot.sh[m
+[36m@@ -25,9 +25,12 @@[m [mif [ ! -f "$HOME/.config/hypr/.initial_startup_done" ]; then[m
+     sleep 1[m
+     # Initialize wallust and wallpaper[m
+ 	if [ -f "$wallpaper" ]; then[m
+[31m-		wallust run -s $wallpaper > /dev/null [m
+[31m-		swww query || swww-daemon && $swww $wallpaper $effect[m
+[31m-	    "$scriptsDir/WallustSwww.sh" > /dev/null 2>&1 & [m
+[32m+[m		[32mwallust run -s $wallpaper > /dev/null[m
+[32m+[m[32m        swww query || swww-daemon[m
+[32m+[m[32m        for output in $(swww query | grep 'Output:' | awk '{print $2}'); do[m
+[32m+[m		[32m    $swww --output "$output" $wallpaper $effect[m
+[32m+[m[32m        done[m
+[32m+[m	[32m    "$scriptsDir/WallustSwww.sh" > /dev/null 2>&1 &[m
+ 	fi[m
+      [m
+     # initiate GTK dark mode and apply icon and cursor theme[m
+[1mdiff --git a/monitors.conf b/monitors.conf[m
+[1mindex 74a6081..5abc5e9 100644[m
+[1m--- a/monitors.conf[m
+[1m+++ b/monitors.conf[m
+[36m@@ -16,7 +16,8 @@[m
+ # Configure your Display resolution, offset, scale and Monitors here, use `hyprctl monitors` to get the info.[m
+ [m
+ # Monitors[m
+[31m-monitor=,preferred,auto,1[m
+[32m+[m[32mmonitor=eDP-1, 1920x1200@60, 0x0, 1[m
+[32m+[m[32mmonitor=HDMI-A-1,1920x1080@60, 0x-1080, 1[m[41m [m
+ [m
+ # High Refresh Rate[m
+ monitor=,highrr,auto,1[m
+[1mdiff --git a/wallpaper_effects/.wallpaper_current b/wallpaper_effects/.wallpaper_current[m
+[1mindex d8a3844..4ac3dab 100644[m
+Binary files a/wallpaper_effects/.wallpaper_current and b/wallpaper_effects/.wallpaper_current differ
+[1mdiff --git a/wallpaper_effects/.wallpaper_modified b/wallpaper_effects/.wallpaper_modified[m
+[1mindex 795cdef..28c99f5 100644[m
+Binary files a/wallpaper_effects/.wallpaper_modified and b/wallpaper_effects/.wallpaper_modified differ
+[1mdiff --git a/wallust/wallust-hyprland.conf b/wallust/wallust-hyprland.conf[m
+[1mindex fb9ff3c..f8533b1 100644[m
+[1m--- a/wallust/wallust-hyprland.conf[m
+[1m+++ b/wallust/wallust-hyprland.conf[m
+[36m@@ -1,21 +1,21 @@[m
+ # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  [m
+ # /* wallust template - colors-hyprland */ [m
+ [m
+[31m-$background = rgb(1A1B1E)[m
+[31m-$foreground = rgb(B0BFBD)[m
+[31m-$color0 = rgb(404145)[m
+[31m-$color1 = rgb(0D1421)[m
+[31m-$color2 = rgb(0D1421)[m
+[31m-$color3 = rgb(0D1421)[m
+[31m-$color4 = rgb(0D1622)[m
+[31m-$color5 = rgb(15312F)[m
+[31m-$color6 = rgb(173532)[m
+[31m-$color7 = rgb(869B98)[m
+[31m-$color8 = rgb(5E6C6A)[m
+[31m-$color9 = rgb(111B2C)[m
+[31m-$color10 = rgb(111B2C)[m
+[31m-$color11 = rgb(111B2C)[m
+[31m-$color12 = rgb(121E2D)[m
+[31m-$color13 = rgb(1C413F)[m
+[31m-$color14 = rgb(1E4742)[m
+[31m-$color15 = rgb(869B98)[m
+[32m+[m[32m$background = rgb(000004)[m
+[32m+[m[32m$foreground = rgb(F8EDD8)[m
+[32m+[m[32m$color0 = rgb(000004)[m
+[32m+[m[32m$color1 = rgb(232830)[m
+[32m+[m[32m$color2 = rgb(2A2B32)[m
+[32m+[m[32m$color3 = rgb(5C3F41)[m
+[32m+[m[32m$color4 = rgb(945652)[m
+[32m+[m[32m$color5 = rgb(945652)[m
+[32m+[m[32m$color6 = rgb(B0996C)[m
+[32m+[m[32m$color7 = rgb(ECDDBF)[m
+[32m+[m[32m$color8 = rgb(A59B86)[m
+[32m+[m[32m$color9 = rgb(2F3540)[m
+[32m+[m[32m$color10 = rgb(383943)[m
+[32m+[m[32m$color11 = rgb(7A5457)[m
+[32m+[m[32m$color12 = rgb(C6726E)[m
+[32m+[m[32m$color13 = rgb(C6726E)[m
+[32m+[m[32m$color14 = rgb(EACC90)[m
+[32m+[m[32m$color15 = rgb(ECDDBF)[m
